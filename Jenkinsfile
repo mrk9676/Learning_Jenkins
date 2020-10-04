@@ -1,5 +1,5 @@
 node('QA') {
-	properties([pipelineTriggers([cron(['30 12 * * *'])])])
+	properties([pipelineTriggers([cron('30 12 * * *')])])
 	stage('git'){
 	git 'https://github.com/mrk9676/Learning_Jenkins.git'
 	}
