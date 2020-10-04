@@ -7,7 +7,7 @@ node('QA') {
 	sh 'mvn clean package'
 	}
 	stage('testresults'){
-	junit 'gameoflife-web/target/surefire-reports/*.xml
+	junit 'gameoflife-web/target/surefire-reports/*.xml'
 	}
 	stage('artifacts'){
 	archiveArtifacts artifacts: 'gameoflife-web/target/*.war', followSymlinks: false
