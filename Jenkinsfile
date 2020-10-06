@@ -1,25 +1,17 @@
 node('QA') {
-	def responses = null
+	def resourses = null
 	stage('selection') {
-		responses = input message: "Enter Branch and Build Type",
-		parameters: [string(defualtValue: '',description: 'Enter Branch Name' , name: 'BRANCH_NAME'),
-			    choice(choices:'DEBUG\nRELEASE' , description: 'Select choice', name: 'BUILD_TYPE')]
+		responses = input message: 'Enter build type and branch name',
+		parameters: [string(name:'BRANCH_NAME',defaultValue:'',description:'Enter Branch Name',
+			     choice(name:'BUILD_TYPE',choices:'DEBUG\nRELEASE',description:'Enter Build Type')]
 	}
 	stage('git') {
-		git 'https://github.com/mrk9676/Learning_Jenkins.git'
+	git 'https://github.com/mrk9676/Learning_Jenkins.git'
 	}
-	stage('build') {
-		if (responses.BUILD.TYPE == 'DEBUG')
-			sh 'mvn clean package'
-		if (response.BUILD.TYPE == 'RELEASE')
-			sh 'mvn install' 
+	stage('testcases') {
+	junit 'gameoflife-web/target/surefire-reports/*.xml'
 	}
-	stage('testresults'){
-		junit 'gameoflife-web/taget/surefire-reports/*.xml'
-	}
-	stage('artifacts'){
+	stage('Artifacts') {
 	archiveArtifacts artifacts: 'gameoflife-web/target/*.war'
 	}
 }
-	
-
