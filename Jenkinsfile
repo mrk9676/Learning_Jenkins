@@ -3,7 +3,7 @@ node('QA') {
         def responses = null
         stage('selection'){
             responses = input message: 'Enter branch and select build type',
-            parameters: [name: 'BRANCH_NAME', string(defaultValue: '', description: 'Enter the branch'),
+            parameters: [string(name: 'BRANCH_NAME', defaultValue: '', description: 'Enter the branch'),
                         choice(name: 'BUILD_TYPE', choices: 'DEBUG\nRELEASE', description: 'BUILD Type')]
 
         }
