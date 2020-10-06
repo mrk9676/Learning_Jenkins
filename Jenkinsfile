@@ -3,7 +3,7 @@ node('QA') {
 	stage('selection') {
 		responses = input message: 'Enter build type and branch name',
 		parameters: [string(name: 'BRANCH_NAME', defaultValue: 'master', description: 'Enter Branch Name'),
-			     choice(name: 'BUILD_TYPE', choices: 'DEBUG\nRELEASE', descripion: 'Enter Build Type')]
+			     choice(name: 'BUILD_TYPE', choices: 'DEBUG\nRELEASE', description: 'Enter Build Type')]
 	}
 	stage('git') {
 	git 'https://github.com/mrk9676/Learning_Jenkins.git'
