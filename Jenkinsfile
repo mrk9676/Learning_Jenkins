@@ -2,7 +2,7 @@ node('QA') {
 	def responses = null
 	stage('selection') {
 		responses = input message: 'Enter build type and branch name',
-		parameters: [string(name: 'BRANCH_NAME', defaultValue: '', description: 'Enter Branch Name'),
+		parameters: [string(name: 'BRANCH_NAME', defaultValue: 'master', description: 'Enter Branch Name'),
 			     choice(name: 'BUILD_TYPE', choices: 'DEBUG\nRELEASE', descripion: 'Enter Build Type')]
 	}
 	stage('git') {
@@ -13,9 +13,6 @@ node('QA') {
 	}
 	if (response.BUILD_TYPE == 'RELEASE') {
 		sh 'mvn clean install'
-	}
-	stage('testcases') {
-	junit 'gameoflife-web/target/surefire-reports/*.xml'
 	}
 	stage('testcases') {
 	junit 'gameoflife-web/target/surefire-reports/*.xml'
