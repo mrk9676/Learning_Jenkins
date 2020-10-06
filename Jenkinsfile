@@ -11,7 +11,7 @@ node('QA') {
 	if (responses.BUILD_TYPE == 'DEBUG') {
 		sh 'mvn clean package'
 	}
-	if ('response.BUILD_TYPE == 'RELEASE') {
+	if (response.BUILD_TYPE == 'RELEASE') {
 		sh 'mvn clean install'
 	}
 	stage('testcases') {
